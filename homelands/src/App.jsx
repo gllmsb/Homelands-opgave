@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { mainLayout } from './layout/mainLayout'
+import { MainLayout } from "./layout/mainLayout"
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Sale } from './pages/Sale'
+import { NotFound } from "./pages/NotFound"
 
 
 function App() {
@@ -11,10 +12,11 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route element={<mainLayout />}>
+          <Route element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="sale" element={<Sale />} />
             <Route path="login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Router>
