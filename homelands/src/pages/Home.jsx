@@ -2,6 +2,7 @@ import React from "react";
 import { useFetch } from "../hooks/useFetch";
 import { Slideshow } from "../components/Slideshow/Slideshow";
 import { PropertyCard } from "../components/PropertyCard/PropertyCard";
+import { CenterTitle } from "../components/CenterTitle/CenterTitle";
 
 export const Home = () => {
   const { data: properties, isLoading, error } = useFetch("https://api.mediehuset.net/homelands/homes");
@@ -38,6 +39,8 @@ export const Home = () => {
           <p>No properties found.</p>
         )}
       </div>
+      <CenterTitle title="Det siger kunderne:" />
+      <CenterTitle title="Mød vores ansatte" />
     </>
   );
 };
