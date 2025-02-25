@@ -7,7 +7,7 @@ export const MainLayout = () => {
   return (
     <div>
         <Navbar />
-        <main className='content' style={{marginTop: "80px", padding: "20px"}}>
+        <main>
             <Outlet />
         </main>
         <Footer />

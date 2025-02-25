@@ -12,23 +12,17 @@ export const Slideshow = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Function to go to the next slide
+  //Next slide function
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  // Function to go to the previous slide
+  //Previous slide function
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
-
-  // Auto-play the slideshow every 7 seconds
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 7000); // Change every 7 seconds
-    return () => clearInterval(interval); // Cleanup to avoid memory leaks
-  }, []);
 
   return (
     <div className={styles.slideshow}>
@@ -44,7 +38,7 @@ export const Slideshow = () => {
         ))}
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Arrows */}
       <button className={styles.prev} onClick={prevSlide}>
         <IoIosArrowDropleft size={40} />
       </button>

@@ -9,6 +9,7 @@
   border-bottom: 2px solid $border;
   font-family: $font1;
   position: relative;
+  z-index: 1000;
 
   .navContainer {
     display: flex;
