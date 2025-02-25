@@ -1,0 +1,126 @@
+@use "../../styles/variables.scss" as *;
+
+.navbar {
+  background: $secondary;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid $border;
+  font-family: $font1;
+  position: relative;
+
+  .navContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Logo */
+  .navLogo {
+    background: $primary;
+    color: $white;
+    font-family: $font2;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 8px 16px;
+    border: 2px solid $secondary;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  /* Nav Links */
+  .navLinks {
+    display: flex;
+    gap: 25px;
+
+    a {
+      text-decoration: none;
+      color: $white;
+      font-weight: bold;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  /* Search Bar */
+  .searchForm {
+    display: flex;
+    align-items: center;
+    background: $white;
+    border: 1px solid $border;
+    border-radius: 5px;
+    padding: 4px 8px;
+    height: 18px;
+  }
+
+  .searchInput {
+    border: none;
+    outline: none;
+    font-family: $font1;
+    padding: 5px;
+    width: 150px;
+
+    &::placeholder {
+      color: $border;
+    }
+  }
+
+  .searchButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $secondary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  /* Burger Menu Button*/
+  .burgerMenu {
+    display: none;
+    cursor: pointer;
+    color: $white;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .navLinks {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: $secondary;
+      padding: 15px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .showMenu {
+      display: flex;
+    }
+
+    .burgerMenu {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        color: $white; 
+    }
+
+    .searchForm {
+        width: 80%;  
+        max-width: 200px; 
+      }
+  }
+}
