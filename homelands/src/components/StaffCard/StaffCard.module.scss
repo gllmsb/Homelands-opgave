@@ -1,10 +1,10 @@
-@use "../../styles/variables.scss" as *;
+@use '../../styles/variables.scss' as *;
 
 .staffCard {
   position: relative;
-  width: 250px; 
+  width: 250px;
   background: $white;
-  border-radius: 10px;
+  border: solid 1px $border;
   overflow: hidden;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -18,13 +18,19 @@
   .staffImage {
     width: 100%;
     height: 300px;
-    object-fit: cover;
+    object-fit: contain;
   }
 
+  /* Default Bottom Text */
   .staffInfo {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     background: rgba(255, 255, 255, 0.9);
     padding: 10px;
-    
+    transition: opacity 0.3s ease-in-out;
+    font-family: $font1;
+
     h3 {
       font-size: 18px;
       font-weight: bold;
@@ -40,12 +46,13 @@
   /* Hover Overlay */
   .overlay {
     position: absolute;
-    bottom: 0;
+    bottom: -100%; 
     width: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     color: $white;
     padding: 15px;
-    transition: opacity 0.3s ease-in-out;
+    transition: bottom 0.3s ease-in-out;
+    font-family: $font1;
 
     h3 {
       font-size: 18px;
@@ -56,5 +63,13 @@
       font-size: 14px;
       margin: 5px 0;
     }
+  }
+
+  &:hover .overlay {
+    bottom: 0; 
+  }
+
+  &:hover .staffInfo {
+    opacity: 0; 
   }
 }

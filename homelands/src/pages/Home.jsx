@@ -7,32 +7,27 @@ import { StaffCard } from "../components/StaffCard/StaffCard";
 import styles from "./Home.module.scss";
 
 export const Home = () => {
-  // Fetch properties
+  //Fetch properties
   const { data: properties, isLoading, error } = useFetch("https://api.mediehuset.net/homelands/homes");
 
-  // Fetch staff data
+  //Fetch staff data
   const { data: staff, isLoading: staffLoading, error: staffError } = useFetch("https://api.mediehuset.net/homelands/staff");
 
   if (isLoading || staffLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   if (staffError) return <p>{staffError}</p>;
 
-  // Get 3 random properties
+  //Prevent error when properties is null
+  if (!properties) return <p>Loading properties...</p>;
+
+  //Get 3 random proerties
   const getRandomProperties = (arr, num) => {
-    if (!arr || arr.length === 0) return [];
+    if (!Array.isArray(arr) || arr.length === 0) return [];
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, num);
   };
 
   const randomProperties = getRandomProperties(properties, 3);
-
-  // Get 4 staff members
-  const getLimitedStaff = (arr, num) => {
-    if (!arr || arr.length === 0) return [];
-    return arr.slice(0, num);
-  };
-
-  const staffList = getLimitedStaff(staff, 4);
 
   return (
     <>
@@ -42,7 +37,7 @@ export const Home = () => {
           randomProperties.map((property) => (
             <PropertyCard
               key={property.id}
-              image={property.image} // Using the default image from the homes API
+              images={property.images} 
               address={property.address}
               zipcode={property.zipcode}
               city={property.city}
@@ -59,9 +54,9 @@ export const Home = () => {
       <CenterTitle title="Det siger kunderne:" />
       <CenterTitle title="Mød vores ansatte" />
       
-      <div className="staff-list">
-        {staffList.length > 0 ? (
-          staffList.map((member) => (
+      <div className={styles.staffList}>
+        {staff?.length > 0 ? (
+          staff.map((member) => (
             <StaffCard
               key={member.id}
               image={member.image}
