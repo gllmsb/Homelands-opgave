@@ -1,32 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './Navbar.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 import { FiMenu, FiX, FiSearch } from 'react-icons/fi';
+import { UserContext } from '../../context/UserContext';
+
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { user, logout } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    alert(`Searching for: ${searchQuery}`); //Placeholder for now
+    alert(`Searching for: ${searchQuery}`);
   };
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
-        {/* Logo */}
         <Link to="/" className={styles.navLogo}>
           HOMELANDS
         </Link>
 
-        {/* Navigation Links */}
         <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ''}`}>
           <Link to="/" onClick={() => setMenuOpen(false)}>Forside</Link>
           <Link to="/sale" onClick={() => setMenuOpen(false)}>Boliger til salg</Link>
-          <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
 
-          {/* Search Bar */}
+          {user ? (
+            <Link 
+            to="#" 
+            className={styles.logoutButton} 
+            onClick={() => { logout(navigate); setMenuOpen(false); }}>
+            Logout
+          </Link>
+          ) : (
+            <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
+          )}
+
           <form className={styles.searchForm} onSubmit={handleSearch}>
             <input 
               type="text" 
@@ -41,7 +52,6 @@ export const Navbar = () => {
           </form>
         </div>
 
-        {/* Burger Menu Button */}
         <div className={styles.burgerMenu} onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FiX size={30} /> : <FiMenu size={30} />}
         </div>
