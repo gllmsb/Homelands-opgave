@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FiMenu, FiX, FiSearch } from 'react-icons/fi';
 import { UserContext } from '../../context/UserContext';
 
-
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,7 +12,9 @@ export const Navbar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    alert(`Searching for: ${searchQuery}`);
+    if (searchQuery.trim()) {
+      navigate(`/sale?search=${searchQuery.trim()}`);
+    }
   };
 
   return (
@@ -41,7 +42,7 @@ export const Navbar = () => {
           <form className={styles.searchForm} onSubmit={handleSearch}>
             <input 
               type="text" 
-              placeholder="Søg..." 
+              placeholder="Søg efter adresse, by osv..." 
               value={searchQuery} 
               onChange={(e) => setSearchQuery(e.target.value)} 
               className={styles.searchInput}
